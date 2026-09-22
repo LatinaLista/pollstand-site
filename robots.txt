@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://LatinaLista.github.io/pollstand-site/sitemap.xml
+Sitemap: https://pollstand.app/sitemap.xml
