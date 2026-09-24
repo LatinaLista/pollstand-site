@@ -39,7 +39,8 @@
     gsap.fromTo(promise.querySelectorAll('li'),{x:-14,autoAlpha:0},{x:0,autoAlpha:1,duration:.5,stagger:.12,ease:E,clearProps:'all',scrollTrigger:{trigger:promise,start:'top 70%',once:true}});
   }
 
-  // Request form embed.
-  var req=document.querySelector('.req-embed');
-  if(req)gsap.fromTo(req,{y:28,autoAlpha:0},{y:0,autoAlpha:1,duration:.75,ease:E,clearProps:'all',scrollTrigger:{trigger:req,start:'top 85%',once:true}});
+  // Pricing: tiers rise in together, the 'Most popular' flag lands last.
+  var pg=document.querySelector('.price-grid');
+  if(pg){gsap.fromTo(pg.querySelectorAll('.tier'),{y:30,autoAlpha:0},{y:0,autoAlpha:1,duration:.65,stagger:.1,ease:E,clearProps:'all',scrollTrigger:{trigger:pg,start:'top 82%',once:true}});
+  gsap.fromTo('.tier .flag',{scale:.6,autoAlpha:0},{scale:1,autoAlpha:1,duration:.5,delay:.45,ease:'back.out(2)',clearProps:'all',scrollTrigger:{trigger:pg,start:'top 82%',once:true}});}
 })();
