@@ -110,3 +110,8 @@ footer a{color:var(--ink-2)}
 footer .credit{margin-top:8px}
 footer .credit a{color:var(--ink);font-weight:700}
 footer .credit a span{color:#C75B8F}
+.vote-bar{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;padding:10px 16px;background:var(--ink);color:#F3EFE6;font-size:.92rem;text-align:center;transition:background .18s}
+.vote-bar:hover{background:#1D2B2A}
+.vote-bar b{color:#fff}
+.vote-bar .vb-go{color:var(--brass);font-weight:800;white-space:nowrap}
+.vote-bar .vb-dot{width:8px;height:8px;border-radius:50%;background:var(--brass);animation:brass 1.8s ease-out infinite;flex:none}
