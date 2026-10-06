@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Live polls — PollStand</title>
+<meta name="description" content="Every poll PollStand is running right now. Saw one on social media? Find it here and cast your vote — anonymous, in seconds.">
+<link rel="canonical" href="https://pollstand.app/polls/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://pollstand.app/polls/">
+<meta property="og:title" content="Live polls — PollStand">
+<meta property="og:description" content="Saw a poll on social media? Find it here and cast your vote. Anonymous, takes seconds.">
+<meta property="og:image" content="https://pollstand.app/pollstand-og-1200x630.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20128%20128%22%3E%3Crect%20x=%224%22%20y=%224%22%20width=%22120%22%20height=%22120%22%20rx=%2230%22%20fill=%22%230E6B5E%22/%3E%3Cpath%20d=%22M36%2062%20L56%2082%20L94%2040%22%20fill=%22none%22%20stroke=%22%23D9A441%22%20stroke-width=%2213%22%20stroke-linecap=%22round%22%20stroke-linejoin=%22round%22/%3E%3Crect%20x=%2230%22%20y=%2296%22%20width=%2268%22%20height=%228%22%20rx=%224%22%20fill=%22%23F6F1E8%22/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,500;9..144,600;9..144,700,50&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F6F1E8;--paper-2:#EFE8DB;--card:#FFFDF8;--line:#E2D9C8;--line-2:#CFC4AE;
+  --ink:#14201F;--ink-2:#4A5553;--ink-3:#7E8783;
+  --verd:#0E6B5E;--verd-deep:#0A4F46;--verd-soft:rgba(14,107,94,.08);--verd-glow:rgba(14,107,94,.22);
+  --brass:#D9A441;--brass-deep:#B9862B;--brass-soft:rgba(217,164,65,.16);
+  --display:'Fraunces',Georgia,serif;--body:'Manrope',system-ui,sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{background:var(--paper);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:clip}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1040px;margin:0 auto;padding:0 20px}
+
+.nav{position:sticky;top:0;z-index:20;border-bottom:1px solid var(--line);background:rgba(246,241,232,.86);backdrop-filter:blur(14px)}
+.nav-inner{max-width:1040px;margin:0 auto;padding:12px 20px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.brand{display:flex;align-items:center;gap:11px}
+.mark{width:36px;height:36px;border-radius:10px;background:var(--verd);display:grid;place-items:center;box-shadow:0 8px 20px var(--verd-glow);flex:none}
+.mark svg{width:21px;height:21px;color:var(--brass)}
+.brand-name{font-family:var(--display);font-weight:700;font-size:1.25rem;letter-spacing:-.01em;line-height:1;font-variation-settings:'opsz' 48,'SOFT' 50}
+.brand-name span{color:var(--verd)}
+.brand-tag{font-size:.6rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);margin-top:4px}
+.nav-links{display:flex;align-items:center;gap:22px;font-size:.88rem;font-weight:600;color:var(--ink-2)}
+.nav-links a:hover{color:var(--verd)}
+.nav-links .cta{color:#fff;background:var(--verd);padding:9px 16px;border-radius:10px;box-shadow:0 10px 24px var(--verd-glow)}
+.nav-links .cta:hover{background:var(--verd-deep);color:#fff}
+@media(max-width:640px){.nav-links .hide-sm{display:none}.brand-tag{display:none}}
+
+.hero{padding:56px 0 28px;text-align:center}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:.72rem;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--verd);padding:6px 12px;border:1px solid rgba(14,107,94,.3);border-radius:999px;background:var(--verd-soft)}
+.eyebrow::before{content:'';width:7px;height:7px;border-radius:50%;background:var(--brass);animation:pulse 2.2s ease-out infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(217,164,65,.55)}70%{box-shadow:0 0 0 9px rgba(217,164,65,0)}100%{box-shadow:0 0 0 0 rgba(217,164,65,0)}}
+h1{font-family:var(--display);font-weight:700;font-size:clamp(2.1rem,5.4vw,3.4rem);line-height:1.06;letter-spacing:-.02em;margin:18px auto 14px;max-width:16ch;font-variation-settings:'opsz' 144,'SOFT' 50}
+h1 em{font-style:italic;color:var(--verd)}
+.lede{color:var(--ink-2);font-size:1.08rem;max-width:52ch;margin:0 auto}
+
+.group{padding:26px 0 8px}
+.group-head{display:flex;align-items:baseline;gap:12px;margin-bottom:16px}
+.group-head h2{font-family:var(--display);font-weight:700;font-size:1.45rem;letter-spacing:-.01em}
+.count{font-size:.78rem;font-weight:800;color:var(--ink-3);letter-spacing:.08em;text-transform:uppercase}
+
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:18px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:22px 22px 20px;display:flex;flex-direction:column;gap:14px;box-shadow:0 1px 0 rgba(20,32,31,.03),0 18px 40px -28px rgba(20,32,31,.25);position:relative;overflow:hidden}
+.card.open::before{content:'';position:absolute;inset:0 0 auto 0;height:4px;background:linear-gradient(90deg,var(--verd),var(--brass))}
+.card-top{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.org{font-size:.8rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-2)}
+.status{display:inline-flex;align-items:center;gap:6px;font-size:.7rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;padding:5px 10px;border-radius:999px;white-space:nowrap}
+.status.open{background:var(--verd);color:#fff}
+.status.open::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--brass);animation:pulse 2.2s ease-out infinite}
+.status.soon{background:var(--brass-soft);color:var(--brass-deep)}
+.q{font-family:var(--display);font-weight:600;font-size:1.32rem;line-height:1.25;letter-spacing:-.01em;font-variation-settings:'opsz' 72,'SOFT' 50}
+.when{font-size:.9rem;color:var(--ink-2)}
+.when b{color:var(--ink);font-weight:700}
+.actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:auto;padding-top:4px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:13px 20px;border-radius:12px;font-weight:800;font-size:.98rem;border:0;cursor:pointer;transition:background .18s,transform .18s,border-color .18s,color .18s}
+.btn-primary{background:var(--verd);color:#fff;box-shadow:0 12px 26px var(--verd-glow);flex:1 1 auto}
+.btn-primary:hover{background:var(--verd-deep);transform:translateY(-1px)}
+.btn-ghost{background:transparent;color:var(--ink);border:1.5px solid var(--line-2)}
+.btn-ghost:hover{border-color:var(--verd);color:var(--verd)}
+.btn-quiet{background:var(--paper-2);color:var(--ink-2)}
+.btn-quiet:hover{color:var(--verd)}
+
+.closed-list{list-style:none;border:1px solid var(--line);border-radius:16px;background:var(--card);overflow:hidden}
+.closed-list li{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:14px 18px;border-top:1px solid var(--line)}
+.closed-list li:first-child{border-top:0}
+.closed-list .cq{font-weight:700;font-size:.98rem;line-height:1.35}
+.closed-list .cm{font-size:.82rem;color:var(--ink-3);margin-top:2px}
+.closed-list a{flex:none;font-weight:800;font-size:.88rem;color:var(--verd);white-space:nowrap}
+.closed-list a:hover{color:var(--verd-deep);text-decoration:underline}
+@media(max-width:560px){.closed-list li{flex-direction:column;align-items:flex-start}}
+
+.empty{border:1.5px dashed var(--line-2);border-radius:16px;padding:26px;text-align:center;color:var(--ink-2)}
+.empty b{display:block;font-family:var(--display);font-size:1.15rem;color:var(--ink);margin-bottom:4px}
+
+.pitch{margin:46px 0 10px;background:var(--ink);color:#F3EFE6;border-radius:22px;padding:34px 30px;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;position:relative;overflow:hidden}
+.pitch::after{content:'';position:absolute;right:-80px;top:-80px;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(217,164,65,.28),transparent 70%)}
+.pitch h3{font-family:var(--display);font-weight:700;font-size:1.55rem;line-height:1.15;letter-spacing:-.01em;max-width:22ch}
+.pitch p{color:rgba(243,239,230,.72);margin-top:6px;max-width:44ch}
+.pitch .btn{background:var(--brass);color:var(--ink);position:relative;z-index:1}
+.pitch .btn:hover{background:#E6B65A}
+
+.fineprint{margin:26px auto 0;font-size:.84rem;color:var(--ink-3);max-width:62ch;text-align:center}
+.updated{font-size:.78rem;color:var(--ink-3);text-align:center;margin-top:10px}
+footer{border-top:1px solid var(--line);margin-top:40px;padding:30px 20px 40px;text-align:center;color:var(--ink-3);font-size:.82rem}
+footer .brand{justify-content:center;margin-bottom:12px}
+footer .brand-name{color:var(--ink)}
+footer a{color:var(--ink-2)}
+footer .credit{margin-top:8px}
+footer .credit a{color:var(--ink);font-weight:700}
+footer .credit a span{color:#C75B8F}
+@media(prefers-reduced-motion:reduce){.eyebrow::before,.status.open::before{animation:none}}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="/">
+      <div class="mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5.5 11.5l4.5 4.5L18.5 6.5"/><path d="M5.5 20h13" stroke="#F6F1E8"/></svg></div>
+      <div><div class="brand-name">Poll<span>Stand</span></div><div class="brand-tag">Polls people answer</div></div>
+    </a>
+    <div class="nav-links">
+      <a href="/" class="hide-sm">How it works</a>
+      <a href="/#pricing" class="cta">Get a poll</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <span class="eyebrow">Live polls</span>
+    <h1>Saw a poll? <em>Vote here.</em></h1>
+    <p class="lede">Every poll PollStand is running right now, in one place. Find the one you saw on social media and cast your vote. It's anonymous and takes seconds.</p>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="group" aria-labelledby="h-open">
+    <div class="group-head"><h2 id="h-open">Open now</h2><span class="count" id="n-open"></span></div>
+    <div class="cards" id="open"></div>
+  </section>
+
+  <section class="group" id="g-soon" aria-labelledby="h-soon" hidden>
+    <div class="group-head"><h2 id="h-soon">Coming soon</h2><span class="count" id="n-soon"></span></div>
+    <div class="cards" id="soon"></div>
+  </section>
+
+  <section class="group" id="g-closed" aria-labelledby="h-closed" hidden>
+    <div class="group-head"><h2 id="h-closed">Recently closed</h2><span class="count" id="n-closed"></span></div>
+    <ul class="closed-list" id="closed"></ul>
+  </section>
+
+  <p class="updated" id="updated" aria-live="polite"></p>
+
+  <aside class="pitch">
+    <div>
+      <h3>Want a poll like these for your organization?</h3>
+      <p>Your question, your brand, a live results page and an automatic results email. Done for you, from $25.</p>
+    </div>
+    <a class="btn" href="/#pricing">See how it works →</a>
+  </aside>
+
+  <p class="fineprint">PollStand polls are opinion polls, not scientific surveys. Results show how the people who chose to vote feel, not a statistical claim about everyone. Votes are anonymous.</p>
+</main>
+
+<footer>
+  <div class="brand">
+    <div class="mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5.5 11.5l4.5 4.5L18.5 6.5"/><path d="M5.5 20h13" stroke="#F6F1E8"/></svg></div>
+    <div><div class="brand-name">Poll<span>Stand</span></div><div class="brand-tag">Polls people answer</div></div>
+  </div>
+  <div>Trevino TodaMedia LLC · Dallas, Texas · <a href="mailto:polls@pollstand.app">polls@pollstand.app</a> · <a href="/">pollstand.app</a></div>
+  <div class="credit">A product of <a href="https://causealytics.com" target="_blank" rel="noopener">Cause<span>@</span>lytics</a></div>
+</footer>
+
+<script>
+(function(){
+  // Rows come from the "PollStand — Poll Directory" Google Sheet. Add a row there and it appears here.
+  var FEED = 'https://app.causealytics.com/api/public/landing-pages/7839/sheet-data';
+  var TZ = 'America/Chicago';
+  // Shown instantly and used if the feed can't be reached.
+  var FALLBACK = [
+    {"Question":"How do you plan to vote in the midterms?","Organization":"Latina Lista","Opens":"2026-10-06 8:00","Closes":"2026-10-13 8:00","Vote URL":"https://app.causealytics.com/p/wYHeDYZc","Results URL":"https://app.causealytics.com/p/hwL5bk5JSX","Listed":"Yes"},
+    {"Question":"Which news sources do you trust the most?","Organization":"Latina Lista","Opens":"2026-09-23 8:00","Closes":"2026-09-30 12:00","Vote URL":"https://app.causealytics.com/p/guX6usrZNU","Results URL":"https://app.causealytics.com/p/d62XEXLtS","Listed":"Yes"}
+  ];
+  var CLOSED_DAYS = 45; // how long a closed poll stays listed
+
+  function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
+  function safeUrl(u){u=String(u||'').trim();return /^https:\/\//i.test(u)?u:'';}
+
+  // Offset (minutes) of Central time at a given instant, DST-aware.
+  function tzOffset(ms){
+    var p=new Intl.DateTimeFormat('en-US',{timeZone:TZ,hourCycle:'h23',year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',second:'2-digit'}).formatToParts(new Date(ms));
+    var o={};p.forEach(function(x){o[x.type]=x.value;});
+    return (Date.UTC(+o.year,+o.month-1,+o.day,+o.hour%24,+o.minute,+o.second)-ms)/60000;
+  }
+  // Accepts "2026-10-13 8:00", "2026-10-13 8:00 AM", "10/13/2026 8:00 AM", "2026-10-13" (Central), or full ISO.
+  function parseWhen(s){
+    s=String(s||'').trim(); if(!s) return null;
+    if(/[zZ]$|[+-]\d\d:?\d\d$/.test(s)){var d=Date.parse(s);return isNaN(d)?null:d;}
+    var m=s.match(/^(\d{4})-(\d{1,2})-(\d{1,2})(?:[ T]+(\d{1,2})(?::(\d{2}))?\s*([ap]\.?m\.?)?)?$/i)||null, y,mo,da,h,mi,ap;
+    if(m){y=+m[1];mo=+m[2];da=+m[3];h=m[4];mi=m[5];ap=m[6];}
+    else{m=s.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})(?:\s+(\d{1,2})(?::(\d{2}))?\s*([ap]\.?m\.?)?)?$/i); if(!m) return null; mo=+m[1];da=+m[2];y=+m[3];h=m[4];mi=m[5];ap=m[6];}
+    h=h==null?0:+h; mi=mi==null?0:+mi;
+    if(ap){ap=ap.toLowerCase().charAt(0); if(ap==='p'&&h<12)h+=12; if(ap==='a'&&h===12)h=0;}
+    var guess=Date.UTC(y,mo-1,da,h,mi);
+    var off=tzOffset(guess-tzOffset(guess)*60000);
+    return guess-off*60000;
+  }
+  function fmt(ms,withTime){
+    var o={timeZone:TZ,weekday:'short',month:'short',day:'numeric'};
+    if(withTime){o.hour='numeric';o.minute='2-digit';}
+    return new Intl.DateTimeFormat('en-US',o).format(new Date(ms)).replace(/:00(?= )/,'')+(withTime?' CT':'');
+  }
+  function left(ms){
+    var d=ms-Date.now(), h=Math.round(d/3600000);
+    if(h<1) return 'Closing within the hour';
+    if(h<24) return h+(h===1?' hour':' hours')+' left';
+    var days=Math.round(h/24); return days+(days===1?' day':' days')+' left';
+  }
+
+  function render(rows){
+    var now=Date.now(), open=[], soon=[], closed=[];
+    rows.forEach(function(r){
+      if(/^\s*no\s*$/i.test(r.Listed||'')) return;
+      var q=String(r.Question||'').trim(), vote=safeUrl(r['Vote URL']);
+      if(!q||!vote) return;
+      var p={q:q,org:String(r.Organization||'').trim(),opens:parseWhen(r.Opens),closes:parseWhen(r.Closes),vote:vote,res:safeUrl(r['Results URL'])};
+      if(p.closes&&p.closes<=now){ if(now-p.closes<CLOSED_DAYS*864e5) closed.push(p); }
+      else if(p.opens&&p.opens>now) soon.push(p);
+      else open.push(p);
+    });
+    open.sort(function(a,b){return (a.closes||9e15)-(b.closes||9e15);});
+    soon.sort(function(a,b){return a.opens-b.opens;});
+    closed.sort(function(a,b){return b.closes-a.closes;});
+
+    var O=document.getElementById('open');
+    O.innerHTML = open.length ? open.map(function(p){
+      return '<article class="card open">'+
+        '<div class="card-top"><span class="org">'+esc(p.org)+'</span><span class="status open">Open</span></div>'+
+        '<h3 class="q">'+esc(p.q)+'</h3>'+
+        (p.closes?'<p class="when"><b>'+left(p.closes)+'</b> · closes '+fmt(p.closes,true)+'</p>':'')+
+        '<div class="actions"><a class="btn btn-primary" href="'+esc(p.vote)+'" target="_blank" rel="noopener">Vote now</a>'+
+        (p.res?'<a class="btn btn-ghost" href="'+esc(p.res)+'" target="_blank" rel="noopener">Live results</a>':'')+'</div>'+
+      '</article>';
+    }).join('') : '<div class="empty"><b>No polls are open this minute.</b>Check back soon, or see recent results below.</div>';
+    document.getElementById('n-open').textContent = open.length ? open.length+(open.length===1?' poll':' polls') : '';
+
+    var S=document.getElementById('soon');
+    document.getElementById('g-soon').hidden=!soon.length;
+    S.innerHTML = soon.map(function(p){
+      return '<article class="card">'+
+        '<div class="card-top"><span class="org">'+esc(p.org)+'</span><span class="status soon">Coming soon</span></div>'+
+        '<h3 class="q">'+esc(p.q)+'</h3>'+
+        '<p class="when">Voting opens <b>'+fmt(p.opens,true)+'</b></p>'+
+        '<div class="actions"><a class="btn btn-quiet" href="'+esc(p.vote)+'" target="_blank" rel="noopener">Save the link</a></div>'+
+      '</article>';
+    }).join('');
+    document.getElementById('n-soon').textContent = soon.length ? soon.length+'' : '';
+
+    var C=document.getElementById('closed');
+    document.getElementById('g-closed').hidden=!closed.length;
+    C.innerHTML = closed.map(function(p){
+      return '<li><div><div class="cq">'+esc(p.q)+'</div><div class="cm">'+esc(p.org)+' · closed '+fmt(p.closes,false)+'</div></div>'+
+        (p.res?'<a href="'+esc(p.res)+'" target="_blank" rel="noopener">Final results →</a>':'')+'</li>';
+    }).join('');
+  }
+
+  function load(){
+    fetch(FEED+'?t='+Date.now(),{cache:'no-store'}).then(function(r){if(!r.ok)throw 0;return r.json();}).then(function(j){
+      if(j&&Array.isArray(j.data)){render(j.data);
+        document.getElementById('updated').textContent='Updated '+new Intl.DateTimeFormat('en-US',{hour:'numeric',minute:'2-digit'}).format(new Date());}
+    }).catch(function(){});
+  }
+
+  render(FALLBACK);
+  load();
+  setInterval(load,60000);
+})();
+</script>
+</body>
+</html>
